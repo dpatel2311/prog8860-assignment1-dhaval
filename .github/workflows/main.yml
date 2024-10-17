@@ -1,15 +1,14 @@
 name: Docker CI Pipeline
-on:
-  pull_request:
-    branches:
-      - feature-branch
  
+on:
   push:
     branches:
-      - main
+      - feature-branch  # Trigger on push to feature-branch for testing
+ 
 jobs:
   docker:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest  # Run on the latest Ubuntu runner
+ 
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
@@ -31,7 +30,7 @@ jobs:
       run: docker image ls
  
     - name: Run Docker Container
-      run: docker run -d --name nodejs-image -p 8080:8080 nodejs-app
+      run: docker run -d --name nodejs-image -p 8080:8080 nodejs-app 
  
     - name: Verify Running Container
       run: docker ps -a
